@@ -1,0 +1,40 @@
+
+<div class="relative flex items-center justify-center aspect-video w-full" >
+<img src="https://image.tmdb.org/t/p/original/{{detial.backdrop_path}}" alt="" class="absolute aspect-video w-full ">
+<div class="relative bg-black bg-opacity-80 z-50 w-full aspect-video  flex items-center justify-center ">
+  <div class="  aspect-video w-[calc(100%-14rem)] flex items-center">
+    <div class="mr-24 bg-yellow-500 w-[560px]">
+      <img src="https://image.tmdb.org/t/p/original/{{detial.poster_path}}" alt="">
+    </div>
+    <div class="h-[calc(100%-6rem)] w-[1px] border-r-[1px] border-gray-500 "></div>
+    <div class="w-full pl-24 py-16 h-full flex flex-col gap-4">
+      <p class="text-gray-200 first-letter:text-red-700 text-5xl font-sans font-extrabold ">{{detial.title}}{{detial.name}}</p>
+      <div class="flex flex-col gap-3">
+        <p class="text-gray-100  text-xl  tracking-wider underline decoration-red-800 underline-offset-4 decoration-4">Overview</p>
+      <p class="text-gray-100">{{detial.overview}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<p class="text-white">{{detial?.title}}</p>
+
+<div class="flex items-center justify-center">
+  <div class="grid grid-cols-2 gap-6">
+    <div
+      class="w-fit flex flex-col items-center justify-center gap-6"
+      *ngFor="let item of trailers"
+    >
+      <iframe
+        width="560"
+        height="315"
+        [src]="item | secure"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>

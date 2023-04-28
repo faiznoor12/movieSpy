@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceService } from './services/service.service';
-import { BehaviorSubject, Observable, combineLatest, switchMap ,map} from 'rxjs';
-import { movies } from './model/movie';
+import { BehaviorSubject, Observable, combineLatest, switchMap } from 'rxjs';
+import { movies } from '../../model/movie';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class AppComponent implements OnInit {
+export class HomeComponent implements OnInit {
   mt:boolean=false
   dw:boolean=false
   pmt:boolean=false
@@ -63,4 +63,3 @@ export class AppComponent implements OnInit {
     this.pmt=!this.pmt
   }
 }
-

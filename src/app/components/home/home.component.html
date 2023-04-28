@@ -1,0 +1,85 @@
+
+<div class="flex flex-col ">
+<app-trendmove></app-trendmove>
+<div class="trending px-4">
+  <div class="" *ngIf="$filter | async as filter">
+    <div class="flex items-center px-5 gap-4 py-4">
+      <p class="text-white text-xl  tracking-wider underline decoration-red-800 underline-offset-4 decoration-4">Trending</p>
+
+
+
+      <div name="show button" class="relative flex px-1 p-0.5 rounded-full border-2 gap-4 border-red-800"(click)="show(filter.tshow,'t')">
+        <p class="relative z-50 w-14 text-white flex justify-center">Movie</p>
+        <p class="relative z-50 w-14 text-white flex justify-center">Tv</p>
+        <div class="w-16 transition-all rounded-full left-0.5 h-[24px] bg-red-800 absolute top-0.75" [ngClass]="{'right-0.5': mt ,'left-0.5':!mt}"></div>
+      </div>
+
+
+      <div name="time button" class="relative flex px-1 p-0.5 rounded-full border-2 gap-4 border-red-800"(click)="time(filter.time)">
+        <p class="relative z-50 w-14 text-white flex justify-center">Day</p>
+        <p class="relative z-50 w-14 text-white flex justify-center">Week</p>
+        <div class="w-16 h-[24px] transition-all rounded-full left-0.5  bg-red-800 absolute top-0.75" [ngClass]="{'right-0.5': dw ,'left-0.5':!dw}"></div>
+      </div>
+    </div>
+
+
+    <div class="overflow-auto w-full flex gap-4 h-full">
+      <div *ngFor="let item of $tmovies | async"  [routerLink]="['/movieDetials', item.id]" routerLinkActive="router-link-active" >
+        <div class="w-48 relative overflow-hidden h-full" >
+          <img
+            src="https://image.tmdb.org/t/p/w500/{{ item.poster_path }}"
+            alt=""
+            class="rounded-lg"
+          />
+          <div
+            class="absolute bg-gradient-to-t from-black via-transparent to-transparent rounded-lg text-white h-[200%] w-full hover:-top-72 transition-all top-0 px-5 hover:pb-8 gap-4 flex flex-col justify-end"
+          >
+            <div class="">{{ item.name }}{{ item.title }}</div>
+            <div class="flex items-center justify-between">
+              <img src="../assets/imdb-icon.svg" alt="" class="h-8" />
+              <p class="-">{{ item.vote_average | number : "1.0-0" }}/10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popular px-4">
+  <div class="" *ngIf="$filter | async as filter">
+    <div class="flex items-center px-5 gap-4 py-4 ">
+      <p class="text-white text-xl  tracking-wider underline decoration-red-800 underline-offset-4 decoration-4">Popular</p>
+
+      <div class="relative flex px-1 p-0.5 rounded-full border-2 gap-4 border-red-800"(click)="show(filter.pshow,'p')">
+        <p class="relative z-50 w-14 text-white flex justify-center">Movie</p>
+        <p class="relative z-50 w-14 text-white flex justify-center">Tv</p>
+        <div class="w-16 transition-all rounded-full left-0.5 h-[24px] bg-red-800 absolute top-0.75" [ngClass]="{'right-0.5': pmt ,'left-0.5':!pmt}"></div>
+      </div>
+
+
+    </div>
+
+
+    <div class="overflow-auto w-full flex gap-4 h-full">
+      <div *ngFor="let item of $pmovies | async">
+        <div class="w-48 relative overflow-hidden h-full">
+          <img
+            src="https://image.tmdb.org/t/p/w500/{{ item.poster_path }}"
+            alt=""
+            class="rounded-lg"
+          />
+          <div
+            class="absolute bg-gradient-to-t from-black via-transparent to-transparent rounded-lg text-white h-[200%] w-full hover:-top-72 transition-all top-0 px-5 hover:pb-8 gap-4 flex flex-col justify-end"
+          >
+            <div class="">{{ item.name }}{{ item.title }}</div>
+            <div class="flex items-center justify-between">
+              <img src="../assets/imdb-icon.svg" alt="" class="h-8" />
+              <p class="-">{{ item.vote_average | number : "1.0-0" }}/10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

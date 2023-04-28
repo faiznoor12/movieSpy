@@ -1,0 +1,26 @@
+
+
+
+<div class=" w-[calc(100vw-21rem)] overflow-auto relative transition-all text-white">
+<owl-carousel-o [options]="customOptions">
+  <ng-container *ngFor="let item of $tmovies | async">
+    <ng-template class="slide" carouselSlide>
+      <div class="flex mx-auto w-full  gap-6 overflow-hidden justify-center" >
+          <div class="flex justify-end bg-black md:h-[450px] lg:h-[550px] h-[250px] w-full  overflow-hidden relative ">
+            <div class="relative">
+             <img src="https://image.tmdb.org/t/p/original/{{item.backdrop_path}}" alt="" class=" aspect-video h-full ">
+             <div class="absolute  bg-gradient-to-r from-black to-transparent top-0 aspect-video h-full "></div>
+            </div>
+            <div class="w-48 md:w-[330px] lg:w-[660px]  h-[470px] flex-col md:gap-2 lg:gap-4 z-40 p-4 md:p-8 lg:p-12 absolute m-10 left-0 flex justify-center items-center ">
+              <div class="gap-6 flex flex-col h-full ">
+                <p class=" text-2xl md:text-4xl lg:text-5xl font-extrabold font-sans first-letter:text-red-600 text-white ">{{item.name|titlecase}}{{item.title|titlecase}}</p>
+                <p class="hidden md:block text-xl text-white  overflow-auto max-h-72">{{item.overview}}</p>
+                <button class="text-white bg-red-600 px-6 py-3 w-fit rounded-md hover:outline outline-offset-2 outline-2 outline-red-600 " [routerLink]="['/movieDetials', item.id]">Watch now</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>
+</div>
