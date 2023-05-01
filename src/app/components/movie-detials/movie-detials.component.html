@@ -1,26 +1,122 @@
+<div class="relative flex items-center justify-center h-[800px] w-full " >
+  <img
+    src="https://image.tmdb.org/t/p/original/{{ detial?.backdrop_path }}"
+    alt=""
+    class="absolute h-[800px] w-full"
+  />
+  <div
+    class="relative bg-black bg-opacity-80 z-50 w-full h-[800px] flex items-center justify-center"
+  >
+    <div class="h-[800px] w-[calc(100%-14rem)] flex items-center">
+      <div class="mr-24 bg-yellow-500 w-[560px]">
+        <img
+          src="https://image.tmdb.org/t/p/original/{{ detial?.poster_path }}"
+          alt=""
+        />
+      </div>
+      <div
+        class="h-[calc(100%-12rem)] w-[1px] border-r-[1px] border-gray-500"
+      ></div>
+      <div class="w-full pl-24 py-16 h-full flex flex-col gap-4 justify-center">
+        <div class="flex flex-col gap-1">
+          <p
+            class="text-gray-200 first-letter:text-red-700 text-5xl font-sans font-extrabold"
+          >
+            {{ detial?.title }}
+          </p>
+          <div class="flex gap-2">
+            <p class="text-gray-200">{{ detial?.release_date }}</p>
+            <div class="flex gap-2">
+              <div class="" *ngFor="let item of genres">
+                <p
+                  class="text-white px-2 py-[2px] bg-red-800 rounded-lg text-sm"
+                >
+                  {{ item.name }}
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-200" >{{ detial?.runtime | hourMinute }}</p>
+          </div>
+        </div>
 
-<div class="relative flex items-center justify-center aspect-video w-full" >
-<img src="https://image.tmdb.org/t/p/original/{{detial.backdrop_path}}" alt="" class="absolute aspect-video w-full ">
-<div class="relative bg-black bg-opacity-80 z-50 w-full aspect-video  flex items-center justify-center ">
-  <div class="  aspect-video w-[calc(100%-14rem)] flex items-center">
-    <div class="mr-24 bg-yellow-500 w-[560px]">
-      <img src="https://image.tmdb.org/t/p/original/{{detial.poster_path}}" alt="">
-    </div>
-    <div class="h-[calc(100%-6rem)] w-[1px] border-r-[1px] border-gray-500 "></div>
-    <div class="w-full pl-24 py-16 h-full flex flex-col gap-4">
-      <p class="text-gray-200 first-letter:text-red-700 text-5xl font-sans font-extrabold ">{{detial.title}}{{detial.name}}</p>
-      <div class="flex flex-col gap-3">
-        <p class="text-gray-100  text-xl  tracking-wider underline decoration-red-800 underline-offset-4 decoration-4">Overview</p>
-      <p class="text-gray-100">{{detial.overview}}</p>
+        <div
+          class="flex items-center justify-around lg:justify-start lg:gap-6 w-full py-3 text-gray-200"
+        >
+          <div
+            class="flex flex-col lg:flex-row justify-center items-center gap-1 lg:gap-3"
+          >
+            <p class="hidden lg:block text-xl">User Score</p>
+            <div
+              class="text-xs md:text-sm h-12 w-12 md:h-11 md:w-11 lg:h-14 lg:w-14 flex justify-center items-center rounded-full text-white bg-primary-color relative"
+            >
+              <p class="absolute top-[33%] text-sm lg:text-sm">
+                {{ math.floor(detial?.vote_average * 10) }}%
+              </p>
+              <svg
+                class="rotate-[-90deg] lg:h-[48px] lg:w-[48px]"
+                width="50px"
+                height="50px"
+                viewBox="0 0 100 100"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="transparent"
+                  [attr.stroke]="ratingcolor2(detial?.vote_average * 10)"
+                  [attr.stroke-dasharray]="314"
+                  stroke-width="9"
+                  class="scale-[0.95]"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="transparent"
+                  [attr.stroke]="ratingcolor(detial?.vote_average * 10)"
+                  [attr.stroke-dashoffset]="
+                    3.14 * (100 - detial?.vote_average * 10)
+                  "
+                  [attr.stroke-dasharray]="314"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                  class="scale-[0.95]"
+                />
+              </svg>
+            </div>
+            <p class="text-sm md:text-base lg:hidden">User Score</p>
+          </div>
+          <div class="h-full border-r-[1px] border-gray-400"></div>
+
+          <div class="flex flex-col">
+            <p>{{ detial?.original_language | lang }}</p>
+            <p>popularity : {{ detial?.popularity }}</p>
+            <p>votes : {{ detial?.vote_count }}</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <p
+            class="text-gray-100 text-xl tracking-wider underline decoration-red-800 underline-offset-4 decoration-4"
+          >
+            Overview
+          </p>
+          <p class="text-gray-100">{{ detial?.overview }}</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
-<p class="text-white">{{detial?.title}}</p>
+<div class="flex items-center justify-center flex-col">
+  <div class="w-full">
+    <p
+      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+    >
+      Videos
+    </p>
+  </div>
 
-<div class="flex items-center justify-center">
   <div class="grid grid-cols-2 gap-6">
     <div
       class="w-fit flex flex-col items-center justify-center gap-6"
@@ -32,9 +128,89 @@
         [src]="item | secure"
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="accelerometer; autoplay; encrypted-media; picture-in-picture; "
         allowfullscreen
       ></iframe>
     </div>
+  </div>
+</div>
+
+<div class="flex items-center justify-center flex-col">
+  <div class="w-full">
+    <p
+      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+    >
+      Casts
+    </p>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div
+      class="w-fit flex flex-col items-center justify-center gap-6"
+      *ngFor="let item of casts"
+    >
+      <div class="flex w-[400px] rounded-xl">
+        <img
+          class="object-cover object-center w-16 h-16 rounded-full m-4"
+          src="https://image.tmdb.org/t/p/original/{{ item?.profile_path }}"
+          alt=""
+        />
+        <div
+          class="h-full flex flex-col items-start justify-center text-gray-200"
+        >
+          <p class="text-gray-100 text-base">{{ item?.original_name }}</p>
+          <p class="text-gray-400">({{ item?.character }})</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div  class="flex items-center justify-center flex-col">
+  <div class=" w-full">
+    <p class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6 ">
+    Crew
+    </p>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div
+      class="w-fit flex flex-col items-center justify-center gap-6"
+      *ngFor="let item of casts"
+    >
+    <div class="flex w-[400px]  rounded-xl">
+      <img class="object-cover object-center w-16 h-16 rounded-full m-4 " src="https://image.tmdb.org/t/p/original/{{ item?.profile_path}}" alt="">
+  <div class="h-full flex flex-col items-start justify-center text-gray-200">
+      <p class="text-gray-100 text-base">{{item?.original_name}}</p>
+      <p class="text-gray-400">({{item?.character}})</p>
+    </div>
+    </div>
+    </div>
+  </div>
+</div> -->
+
+
+ <div  class="flex items-center justify-center flex-col">
+  <div class=" w-full">
+    <p class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6 ">
+  Reviews
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-6">
+    <div
+      class="w-fit flex flex-col items-center justify-center gap-6"
+      *ngFor="let item of review"
+    >
+    <div class="flex  rounded-xl bg-red-400 w-[520px]">
+      <div class="w-full h-24  bg-[#202020dd] ">
+      <img class="rounded-full h-full w-full " src="{{item?.author_details?.avatar_path?.slice(1)}}" alt="">
+      </div>
+  <div class="h-full flex flex-col items-start justify-center text-gray-200">
+      <p class="text-gray-100 text-base">{{item?.author}}</p>
+      <p class="text-gray-400">{{item?.content}}</p>
+    </div>
+    </div>
+    </div>  n
   </div>
 </div>

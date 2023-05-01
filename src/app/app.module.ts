@@ -12,7 +12,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { MovieDetialsComponent } from './components/movie-detials/movie-detials.component';
-import { SafePipe } from './safe.pipe';
+import { SafePipe } from './pipes/safe.pipe';
+import { HourMinutePipe } from './pipes/hour-minute.pipe';
+import { LanguagePipe } from './pipes/language.pipe';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { SafePipe } from './safe.pipe';
     TrendmoveComponent,
     HomeComponent,
     MovieDetialsComponent,
-    SafePipe
+    SafePipe,
+    HourMinutePipe,
+    LanguagePipe
 
   ],
   imports: [

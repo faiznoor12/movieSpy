@@ -96,3 +96,30 @@ export interface videos {
   published_at: string;
   id: string;
 }
+
+
+
+export  interface review {
+  id: number;
+  page: number;
+  results: reviewRes[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface reviewRes {
+  author: string;
+  author_details: Authordetails;
+  content: string;
+  created_at: string;
+  id: string;
+  updated_at: string;
+  url: string;
+}
+
+interface Authordetails {
+  name: string;
+  username: string;
+  avatar_path: string;
+  rating: number;
+}

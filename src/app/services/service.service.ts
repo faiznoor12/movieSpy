@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { movieResponce, movies ,detials, videores, videos } from '../model/movie';
+import { movieResponce, movies ,detials, videores, videos ,review , reviewRes} from '../model/movie';
 import { SingleMovie } from '../model/single-movie';
+
 
 @Injectable({
   providedIn: 'root',
@@ -42,11 +43,11 @@ return res.results
   }
 
 getSingleMovie(id:number):Observable<SingleMovie>{
-return this.http.get<SingleMovie>(`${this.baseUrl}/movie/${id}`,{
-  params:{
-    api_key:this.apiKey
-  }
-})
+return this.http.get<any>(`${this.baseUrl}/movie/${id}`, {
+    params: {
+      api_key: this.apiKey
+    }
+  })
 }
 getvideos(id:number):Observable<videos[]>{
   return this.http.get<videores>(`${this.baseUrl}/movie/${id}/videos`,{
@@ -57,4 +58,20 @@ getvideos(id:number):Observable<videos[]>{
     map(res=>res.results.slice(0,4) )
   )
 }
+getcasts(id:number){
+  return this.http.get(`${this.baseUrl}/movie/${id}/credits`,{
+    params:{
+      api_key:this.apiKey
+    }
+  })
+}
+
+getreview(id:number):Observable<reviewRes[]>{
+return this.http.get<review>(`${this.baseUrl}/movie/${id}/reviews`,{
+params:{
+  api_key:this.apiKey
+}
+}).pipe(map(res=>res.results))
+}
+
 }
