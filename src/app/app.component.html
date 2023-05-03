@@ -3,8 +3,8 @@
 
   <div class="flex flex-col w-screen md:w-[calc(100vw-20rem)] bg-black">
     <app-nav></app-nav>
-    <div class=" overflow-auto h-[calc(100vh-5rem)] w-[calc(100vw-20rem)]">
-      <router-outlet></router-outlet>
+    <div id="main-content" #mainContent class=" overflow-auto h-[calc(100vh-5rem)] w-[calc(100vw-20rem)]">
+      <router-outlet class="router-flex" (activate)="onActivate($event)"></router-outlet>
     </div>
   </div>
 </div>

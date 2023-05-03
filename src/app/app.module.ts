@@ -15,6 +15,7 @@ import { MovieDetialsComponent } from './components/movie-detials/movie-detials.
 import { SafePipe } from './pipes/safe.pipe';
 import { HourMinutePipe } from './pipes/hour-minute.pipe';
 import { LanguagePipe } from './pipes/language.pipe';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LanguagePipe } from './pipes/language.pipe';
     MovieDetialsComponent,
     SafePipe,
     HourMinutePipe,
-    LanguagePipe
+    LanguagePipe,
+    WishlistComponent
 
   ],
   imports: [

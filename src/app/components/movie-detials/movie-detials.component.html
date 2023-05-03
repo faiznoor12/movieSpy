@@ -1,4 +1,4 @@
-<div class="relative flex items-center justify-center h-[800px] w-full " >
+<div class="relative flex items-center justify-center h-[800px] w-full">
   <img
     src="https://image.tmdb.org/t/p/original/{{ detial?.backdrop_path }}"
     alt=""
@@ -35,7 +35,7 @@
                 </p>
               </div>
             </div>
-            <p class="text-gray-200" >{{ detial?.runtime | hourMinute }}</p>
+            <p class="text-gray-200">{{ detial?.runtime | hourMinute }}</p>
           </div>
         </div>
 
@@ -190,27 +190,150 @@
 </div> -->
 
 
- <div  class="flex items-center justify-center flex-col">
-  <div class=" w-full">
-    <p class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6 ">
-  Reviews
+
+
+
+<!---------------------------------------------------------------------------review----------------------------------------------------------------->
+
+<div class="flex items-center justify-center flex-col" *ngIf="rv">
+  <!-- <p class="text-white">{{review.length}}</p> -->
+  <div class="w-full">
+    <p
+      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+    >
+      Reviews
     </p>
   </div>
 
-  <div class="grid grid-cols-2 gap-6">
+  <div class="grid grid-cols-2 gap-6" >
     <div
       class="w-fit flex flex-col items-center justify-center gap-6"
-      *ngFor="let item of review"
+      *ngFor="let item of review ; index as i"
     >
-    <div class="flex  rounded-xl bg-red-400 w-[520px]">
-      <div class="w-full h-24  bg-[#202020dd] ">
-      <img class="rounded-full h-full w-full " src="{{item?.author_details?.avatar_path?.slice(1)}}" alt="">
+    <!-- <div class="text-white">{{item.content}}</div> -->
+      <div
+        class="flex bg-[#0f0f0f] w-[640px] rounded-lg text-white outline outline-2 outline-offset-4 outline-[#0f0f0f]"
+      >
+        <div class="bg-[#0a0a0a] overflow-hidden w-24 flex justify-center py-2">
+          <img
+            *ngIf="checkProfile(item.author_details.avatar_path)"
+            class="rounded-full w-16 h-16"
+            src="{{ item.author_details.avatar_path.slice(1) }}"
+            alt=""
+          />
+
+          <mat-icon
+            *ngIf="!checkProfile(item.author_details.avatar_path)"
+            class="text-[4rem] w-full h-full flex text-gray-300 justify-center"
+          >
+            account_circle
+          </mat-icon>
+        </div>
+        <div class="w-full p-3 pb-4">
+          <div class="pb-3">
+            <p class="font-medium text-xl  text-white ">A review by {{ item?.author }}</p>
+            <p class="text-sm  text-white ">
+              writen by {{ item?.author }} on
+              {{ item?.created_at | date : "medium" }}
+            </p>
+          </div>
+          <div class="h-64 overflow-auto  text-white  ">
+            <p>{{ item?.content }}</p>
+          </div>
+        </div>
       </div>
-  <div class="h-full flex flex-col items-start justify-center text-gray-200">
-      <p class="text-gray-100 text-base">{{item?.author}}</p>
-      <p class="text-gray-400">{{item?.content}}</p>
     </div>
-    </div>
-    </div>  n
   </div>
 </div>
+
+
+<!---------------------------------------------------------------------------/review----------------------------------------------------------------->
+
+
+<!---------------------------------------------------------------------------similar----------------------------------------------------------------->
+
+
+<div class="" *ngIf="sim" >
+  <!-- <p class="text-white">{{sim.length}}</p> -->
+  <div class="w-full">
+    <p
+      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+    >
+      Similar movies
+    </p>
+  </div>
+
+  <div
+    class="overflow-auto flex gap-4 h-full items-center justify-start w-[calc(100%-16rem)] ml-32"
+  >
+    <div *ngFor="let item of similar"  [routerLink]="['/movieDetials', item.id]" >
+      <div
+        class="w-48 relative overflow-hidden h-full"
+        *ngIf="item.poster_path"
+      >
+        <img
+          src="https://image.tmdb.org/t/p/w500/{{ item.poster_path }}"
+          alt="img err"
+          class="rounded-lg"
+        />
+        <div
+          class="absolute bg-gradient-to-t from-black via-transparent to-transparent rounded-lg text-white h-[200%] w-full hover:-top-72 transition-all top-0 px-5 hover:pb-8 gap-4 flex flex-col justify-end"
+        >
+          <div class="">{{ item.name }}{{ item.title }}</div>
+          <div class="flex items-center justify-between">
+            <img src="../assets/imdb-icon.svg" alt="" class="h-8" />
+            <p class="-">{{ item.vote_average | number : "1.0-0" }}/10</p>
+          </div>
+        </div>
+      </div>
+      <!-- <p class="text-white">{{ item.poster_path }}</p> -->
+    </div>
+  </div>
+</div>
+
+
+<!---------------------------------------------------------------------------/similar----------------------------------------------------------------->
+
+
+<!---------------------------------------------------------------------------recommended----------------------------------------------------------------->
+
+
+<div class="" *ngIf="rec" >
+  <!-- <p class="text-white">{{sim.length}}</p> -->
+  <div class="w-full">
+    <p
+      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+    >
+      Recommended movies
+    </p>
+  </div>
+
+  <div
+    class="overflow-auto flex gap-4 h-full items-center justify-start w-[calc(100%-16rem)] ml-32"
+  >
+    <div *ngFor="let item of recommend"  [routerLink]="['/movieDetials', item.id]" >
+      <div
+        class="w-48 relative overflow-hidden h-full"
+        *ngIf="item.poster_path"
+      >
+        <img
+          src="https://image.tmdb.org/t/p/w500/{{ item.poster_path }}"
+          alt="img err"
+          class="rounded-lg"
+        />
+        <div
+          class="absolute bg-gradient-to-t from-black via-transparent to-transparent rounded-lg text-white h-[200%] w-full hover:-top-72 transition-all top-0 px-5 hover:pb-8 gap-4 flex flex-col justify-end"
+        >
+          <div class="">{{ item.name }}{{ item.title }}</div>
+          <div class="flex items-center justify-between">
+            <img src="../assets/imdb-icon.svg" alt="" class="h-8" />
+            <p class="-">{{ item.vote_average | number : "1.0-0" }}/10</p>
+          </div>
+        </div>
+      </div>
+      <!-- <p class="text-white">{{ item.poster_path }}</p> -->
+    </div>
+  </div>
+</div>
+
+<!---------------------------------------------------------------------------/recommended----------------------------------------------------------------->
