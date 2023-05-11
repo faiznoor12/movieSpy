@@ -16,6 +16,8 @@ import { SafePipe } from './pipes/safe.pipe';
 import { HourMinutePipe } from './pipes/hour-minute.pipe';
 import { LanguagePipe } from './pipes/language.pipe';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     SafePipe,
     HourMinutePipe,
     LanguagePipe,
-    WishlistComponent
+    WishlistComponent,
+    FooterComponent,
+    SearchComponent
 
   ],
   imports: [

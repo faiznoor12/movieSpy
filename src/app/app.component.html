@@ -1,10 +1,12 @@
-<div class="flex w-full bg-black">
-  <app-side class="hidden md:flex h-screen"></app-side>
+<div class="relative flex w-full bg-black overflow-auto">
+  <app-side class="hidden lg:flex h-screen"></app-side>
+  <app-side *ngIf="service.menu|async" class="fixed top-0 left-0 z-50 h-screen "></app-side>
 
-  <div class="flex flex-col w-screen md:w-[calc(100vw-20rem)] bg-black">
+  <div class="flex flex-col w-screen lg:w-[calc(100vw-20rem)] bg-black lg:fixed top-0 right-0">
     <app-nav></app-nav>
-    <div id="main-content" #mainContent class=" overflow-auto h-[calc(100vh-5rem)] w-[calc(100vw-20rem)]">
-      <router-outlet class="router-flex" (activate)="onActivate($event)"></router-outlet>
+    <div class=" overflow-auto lg:h-[calc(100vh-5rem)] lg:w-[calc(100vw-20rem)]">
+      <router-outlet class="router-flex" ></router-outlet>
+      <app-footer ></app-footer>
     </div>
   </div>
 </div>

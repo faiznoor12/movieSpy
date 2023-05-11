@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { MovieDetialsComponent } from './components/movie-detials/movie-detials.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
   },
   {
     path:'wishlist', component:  WishlistComponent
+  },
+  {
+    path:'search/:search', component:  SearchComponent
   }
 
 ];

@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
   mt:boolean=false
   dw:boolean=false
   pmt:boolean=false
+  
   $tmovies!: Observable<movies[]>;
   $pmovies!: Observable<movies[]>;
+  $umovies!: Observable<movies[]>;
 
   $filterTime = new BehaviorSubject<'day' | 'week'>('day');
   $trendfilterShow = new BehaviorSubject<'movie' | 'tv'>('movie');
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit {
   $filter = combineLatest({
     time: this.$filterTime,
     tshow: this.$trendfilterShow,
-    pshow:this.$poplarfilterShow
+    pshow:this.$poplarfilterShow,
+  
     // tp: this.$fitrendfilterShowltertp
   });
   title = 'tmdb';
@@ -38,19 +41,26 @@ export class HomeComponent implements OnInit {
        switchMap(({ pshow }) => {
  return this.movies.getPopular(pshow)
       }))
+      this.$umovies=this.$filter.pipe(
+        switchMap(({ pshow }) => {
+  return this.movies.getUpcoming()
+       }))
+ 
+      
   }
 
+  
   time(now: 'day' | 'week') {
     this.$filterTime.next(now === 'day' ? 'week' : 'day');
     this.dwchange()
   }
-  show(now:'movie'|'tv' , tp:'t'|'p'){
+  show(now:'movie'|'tv' , tp:'t'|'p'|'u'){
     if(tp==='t'){
       this.$trendfilterShow.next(now === 'movie' ? 'tv' : 'movie');
        this.mtchange()}
-       else{
-         this.$poplarfilterShow.next(now === 'movie' ? 'tv' : 'movie');
-         this.pmtchange()
+  else{
+        this.$poplarfilterShow.next(now === 'movie' ? 'tv' : 'movie');
+        this.pmtchange()
        }
 
   }
@@ -64,22 +74,6 @@ export class HomeComponent implements OnInit {
     this.pmt=!this.pmt
   }
 
-  @ViewChild("mainContent")
-  private mainContentDiv!: ElementRef<HTMLElement>;
-
-  
-
-  /**
-    Whenever a new route is activated
-    @param _event
-  */
-  onActivate(_event: any): void {
-    // Scrolling back to the top
-    // Reference: https://stackoverflow.com/questions/48048299/angular-5-scroll-to-top-on-every-route-click/48048822
-    if (this.mainContentDiv) {
-      (this.mainContentDiv.nativeElement as HTMLElement).scrollTop = 0;
-    }
-  }
 
 
 

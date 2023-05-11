@@ -1,29 +1,51 @@
-<div class="bg-[#1a171e] w-80  px-10 text-[#767680]">
-<div class="h-20 flex items-center" routerLink="/home">
-  <div class="w-12 mr-2">
-    <img src="../../../assets/Mslogo.svg" alt="">
-  </div>
-  <div class="h-fit font-neue tracking-widest  flex items-center justify-center">
-     <span class="text-white font-bold text-3xl  h-fit ">movie.</span>
-    <span class="text-red-800 font-bold text-3xl  h-fit"><span class="text-4xl">S</span>py</span>
-  </div>
+<div class="flex w-screen">
+  <div class="lg:absolute h-screen z-50 bg-[#1a171e] w-64 lg:w-80 px-6 lg:px-10 text-[#767680]">
+
+    <div class="h-14 lg:h-20 flex items-center" routerLink="/home">
+      <div class="mr-4 lg:hidden" (click)="Service.menufunction(false)">
+        <mat-icon class="-translate-x-2 ">
+          close
+        </mat-icon>
+      </div>
+      <div class="flex h-14 lg:h-20 items-center">
+        <div class="w-8 lg:w-12 mr-2">
+        <img src="../../../assets/Mslogo.svg" alt="">
+      </div>
+      <div class="h-fit font-neue tracking-widest  flex items-center justify-center">
+         <span class="text-white font-bold lg:text-3xl text-2xl  h-fit ">movie.</span>
+        <span class="text-red-800 font-bold lg:text-3xl text-2xl h-fit"><span class="text-3xl lg:text-4xl">S</span>py</span>
+      </div></div>
+    </div>
+    <div class="flex flex-col gap-3 lg:gap-6 pt-4 pb-20  border-b-[0.25px] border-[#62626b]">
+      <p class="text-[rgb(101,101,101)] text-sm lg:text-base font-medium tracking-wider">News Feed</p>
+      <div class="flex gap-4 items-center" routerLink="/home">
+        <img src="../../../assets/explore-solid-svgrepo-com.svg" alt="" class="h-6">
+        <p class="text-white text-lg tracking-wider">Browse</p>
+      </div>
+      <div class="flex gap-4 items-center"  routerLink="/wishlist">
+        <mat-icon>notifications</mat-icon>
+        <p class="text-[#767680] text-lg tracking-wider">Watchlist</p>
+      </div>
+      <div class="flex gap-4 items-center">
+        <mat-icon>favorite</mat-icon>
+        <p class="text-[#767680] text-lg tracking-wider">Coming Soon</p>
+      </div>
+      <div class="flex gap-4 items-center lg:hidden">
+        <mat-icon>message</mat-icon>
+        <p class="text-[#767680] text-lg tracking-wider">Message</p>
+      </div>
+      <div class="flex gap-4 items-center lg:hidden">
+        <mat-icon>notifications</mat-icon>
+        <p class="text-[#767680] text-lg tracking-wider">Notifications</p>
+      </div>
+      <div class="flex gap-4 items-center lg:hidden">
+        <mat-icon>person</mat-icon>
+        <p class="text-[#767680] text-lg tracking-wider">Profile</p>
+      </div>
+
+
+    </div>
+    </div>
+    <div class="w-full flex bg-black/10 backdrop-blur-sm "></div>
+
 </div>
-<div class="flex flex-col gap-6 pt-4 pb-20  border-b-[0.25px] border-[#62626b]">
-  <p class="text-[rgb(101,101,101)] text-base font-medium tracking-wider">News  Feed</p>
-  <div class="flex gap-4 items-center" routerLink="/home">
-    <img src="../../../assets/explore-solid-svgrepo-com.svg" alt="" class="h-6">
-    <p class="text-white text-lg tracking-wider">Browse</p>
-  </div>
-  <div class="flex gap-4 items-center"  routerLink="/wishlist">
-    <!-- <img src="../../../assets/explore-solid-svgrepo-com.svg" alt="" class="h-8"> -->
-    <mat-icon>notifications</mat-icon>
-    <p class="text-[#767680] text-lg tracking-wider">Watchlist</p>
-  </div>
-  <div class="flex gap-4 items-center">
-    <!-- <img src="../../../assets/explore-solid-svgrepo-com.svg" alt="" class="h-8"> -->
-    <mat-icon>favorite</mat-icon>
-    <p class="text-[#767680] text-lg tracking-wider">Coming Soon</p>
-  </div>
-</div>
-</div>
-  

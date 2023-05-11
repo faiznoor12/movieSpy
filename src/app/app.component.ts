@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ServiceService } from './services/service.service';
+// import { ServiceService } from './services/service.service';
 import { BehaviorSubject, Observable, combineLatest, switchMap ,map} from 'rxjs';
 import { movies } from './model/movie';
 import { Router } from '@angular/router';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
     // tp: this.$fitrendfilterShowltertp
   });
   title = 'tmdb';
-  constructor(private movies: ServiceService,private readonly router: Router) {}
+  constructor(private movies: ServiceService,private readonly router: Router ,public service:ServiceService) {}
   ngOnInit(): void {
     this.$tmovies = this.$filter.pipe(
       switchMap(({tshow,time}) =>{

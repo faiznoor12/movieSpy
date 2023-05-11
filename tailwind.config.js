@@ -8,6 +8,9 @@ module.exports = {
      fontFamily:{
     'neue': ['"Bebas Neue"', 'cursive']
           },
+          screen:{
+          'mobile':'360px'
+          },
 
     extend: {  },
   },

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import {
   movieResponce,
   movies,
@@ -19,8 +19,12 @@ import { SingleMovie } from '../model/single-movie';
 export class ServiceService {
   baseUrl = 'https://api.themoviedb.org/3';
   apiKey = 'c906831ceff5cf517394f516666640e3';
+  menu=new BehaviorSubject(false)
 
   constructor(private http: HttpClient) {}
+  menufunction(to:boolean){
+    this.menu.next(to)
+      }
   getTrendng(
     data: 'day' | 'week',
     show: 'movie' | 'tv' | 'all'
@@ -40,6 +44,19 @@ export class ServiceService {
   getPopular(show: 'movie' | 'tv'): Observable<movies[]> {
     return this.http
       .get<movieResponce>(`${this.baseUrl}/${show}/popular`, {
+        params: {
+          api_key: this.apiKey,
+        },
+      })
+      .pipe(
+        map((res) => {
+          return res.results;
+        })
+      );
+  }
+  getUpcoming(): Observable<movies[]> {
+    return this.http
+      .get<movieResponce>(`${this.baseUrl}/movie/upcoming`, {
         params: {
           api_key: this.apiKey,
         },
@@ -109,5 +126,13 @@ export class ServiceService {
         return res.results
       })
     );
+  }
+  getSearchMovies(searchKey:any ){
+    return this.http.get<movieResponce>(`${this.baseUrl}/search/movie`, {
+      params: {
+        api_key: this.apiKey,
+        query:searchKey
+      }
+    }).pipe(map(res => res.results))
   }
 }

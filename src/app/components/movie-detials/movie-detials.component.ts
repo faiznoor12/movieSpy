@@ -31,6 +31,7 @@ rvPrfl!:any
   math = Math;
   credits!:any
   casts:any
+  cl:any
   crew:any
   review!:reviewRes[]
    getreview:any
@@ -77,7 +78,6 @@ show!:string
 this.route.params.subscribe(val=>{
 this.id=val['id']
 this.show=val['show']
-console.log(this.show);
 
 
 this.service.getSingleMovie(this.show,this.id).subscribe(val=> {
@@ -89,6 +89,8 @@ this.service.getcasts(this.show,this.id).subscribe(val=>{
   this.credits=val
   this.casts=this.credits.cast.slice(0,14)
   this.crew=this.credits.crew
+  this.cl=this.casts.length
+  
 })
 this.service.getreview(this.show,this.id).subscribe(val => {
   this.review=val
@@ -106,7 +108,7 @@ this.service.getSimilar(this.show,this.id).subscribe(val => {
 this.service.getrecommended(this.show,this.id).subscribe(val => {
   this.recommend=val
   // this.sim=val.map((res: { poster_path: any; })=>res.poster_path)
-  this.rec=this.similar.length
+  this.rec=this.recommend.length
   // console.log(this.sim);
   
 })

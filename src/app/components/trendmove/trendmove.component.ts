@@ -15,7 +15,7 @@ export class TrendmoveComponent implements OnInit {
 https: any;
   constructor(private movies:ServiceService){}
 ngOnInit(): void {
-this.$tmovies= this.movies.getTrendng('day',"all")
+this.$tmovies= this.movies.getTrendng('day',"movie")
 }
 
 customOptions: OwlOptions = {

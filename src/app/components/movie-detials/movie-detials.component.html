@@ -1,41 +1,57 @@
-<div class="relative flex items-center justify-center h-[800px] w-full">
+<div class="pb-64">
+  <!---------------------------------------------------------------------------overview----------------------------------------------------------------->
+
+<div class="relative flex items-center justify-center xl:h-[800px] w-full flex-col md:flex-row md:overflow-hidden">
   <img
     src="https://image.tmdb.org/t/p/original/{{ detial?.backdrop_path }}"
     alt=""
-    class="absolute h-[800px] w-full"
+    class="absolute hidden md:flex lg:hidden xl:flex h-[800px] w-full"
   />
+
+  <div class="relative aspect-video w-screen md:hidden lg:flex xl:hidden">
+    <img
+    src="https://image.tmdb.org/t/p/original/{{ detial?.backdrop_path }}"
+    alt=""
+    class="absolute top-0 aspect-video w-full"
+  />
+  <div class="relative aspect-video w-screen py-2 md:hidden  flex items-center justify-center bg-black/70">
+    <img src="https://image.tmdb.org/t/p/original/{{detial?.poster_path}}" alt="" class=" h-full object-contain rounded-xl">
+     </div>
+    </div>
+
   <div
-    class="relative bg-black bg-opacity-80 z-50 w-full h-[800px] flex items-center justify-center"
+    class="relative bg-black bg-opacity-80 z-50 w-full xl:h-[800px] flex items-center justify-center"
   >
-    <div class="h-[800px] w-[calc(100%-14rem)] flex items-center">
-      <div class="mr-24 bg-yellow-500 w-[560px]">
+    <div class="xl:h-[800px] lg:w-[calc(100%-14rem)] flex items-center">
+
+      <div class="hidden md:flex mr-24 bg-yellow-500 w-[560px]">
         <img
           src="https://image.tmdb.org/t/p/original/{{ detial?.poster_path }}"
           alt=""
         />
       </div>
       <div
-        class="h-[calc(100%-12rem)] w-[1px] border-r-[1px] border-gray-500"
+        class="hidden md:flex lg:hidden xl:flex xl:h-[calc(100%-12rem)] w-[1px] border-r-[1px] border-gray-500"
       ></div>
-      <div class="w-full pl-24 py-16 h-full flex flex-col gap-4 justify-center">
+      <div class="w-full px-4 py-2 xl:pl-24 xl:py-16 xl:h-full flex flex-col gap-4 justify-center">
         <div class="flex flex-col gap-1">
           <p
-            class="text-gray-200 first-letter:text-red-700 text-5xl font-sans font-extrabold"
+            class="text-gray-200 first-letter:text-red-700 text-xl md:text-5xl font-sans font-extrabold"
           >
-            {{ detial?.title }}
+            {{ detial?.title }}{{detial?.name}}
           </p>
-          <div class="flex gap-2">
-            <p class="text-gray-200">{{ detial?.release_date }}</p>
-            <div class="flex gap-2">
+          <div class="flex md:gap-2 gap-1">
+            <p class="text-gray-200 text-xs md:text-base">{{ detial?.release_date }}</p>
+            <div class="flex md:gap-2 gap-1">
               <div class="" *ngFor="let item of genres">
                 <p
-                  class="text-white px-2 py-[2px] bg-red-800 rounded-lg text-sm"
+                  class="text-white px-1 py-[1px] bg-red-800 rounded-lg text-xs"
                 >
                   {{ item.name }}
                 </p>
               </div>
             </div>
-            <p class="text-gray-200">{{ detial?.runtime | hourMinute }}</p>
+            <p class="text-gray-200 text-xs md:text-base">{{ detial?.runtime | hourMinute }}</p>
           </div>
         </div>
 
@@ -46,6 +62,7 @@
             class="flex flex-col lg:flex-row justify-center items-center gap-1 lg:gap-3"
           >
             <p class="hidden lg:block text-xl">User Score</p>
+
             <div
               class="text-xs md:text-sm h-12 w-12 md:h-11 md:w-11 lg:h-14 lg:w-14 flex justify-center items-center rounded-full text-white bg-primary-color relative"
             >
@@ -88,7 +105,7 @@
           </div>
           <div class="h-full border-r-[1px] border-gray-400"></div>
 
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <p>{{ detial?.original_language | lang }}</p>
             <p>popularity : {{ detial?.popularity }}</p>
             <p>votes : {{ detial?.vote_count }}</p>
@@ -97,59 +114,67 @@
 
         <div class="flex flex-col gap-3">
           <p
-            class="text-gray-100 text-xl tracking-wider underline decoration-red-800 underline-offset-4 decoration-4"
+            class="text-gray-100 text-lg  md:text-xl tracking-wider underline decoration-red-800 underline-offset-4 decoration-4"
           >
             Overview
           </p>
-          <p class="text-gray-100">{{ detial?.overview }}</p>
+          <p class="text-gray-100 text-sm md:text-base">{{ detial?.overview }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!---------------------------------------------------------------------------/overview----------------------------------------------------------------->
+
+<!---------------------------------------------------------------------------video----------------------------------------------------------------->
 
 <div class="flex items-center justify-center flex-col">
   <div class="w-full">
     <p
-      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+      class="text-gray-100 text-xl md:text-3xl tracking-widest underline decoration-red-800 underline-offset-4 md:underline-offset-[6px] decoration-4 md:decoration-[6px] px-4 md:px-56 font-medium font-sans md:py-6 py-3"
     >
       Videos
     </p>
   </div>
 
-  <div class="grid grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
     <div
       class="w-fit flex flex-col items-center justify-center gap-6"
       *ngFor="let item of trailers"
     >
       <iframe
-        width="560"
-        height="315"
         [src]="item | secure"
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; picture-in-picture; "
+        class="w-[340px] aspect-video sm:w-[560px] "
+
         allowfullscreen
       ></iframe>
     </div>
   </div>
 </div>
 
-<div class="flex items-center justify-center flex-col">
+
+<!---------------------------------------------------------------------------/video----------------------------------------------------------------->
+
+<!---------------------------------------------------------------------------casts----------------------------------------------------------------->
+
+<div class="flex items-center justify-center flex-col" *ngIf="cl" >
   <div class="w-full">
     <p
-      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+      class="text-gray-100 text-xl md:text-3xl tracking-widest underline decoration-red-800 underline-offset-4 md:underline-offset-[6px] decoration-4 md:decoration-[6px] px-4 md:px-56 font-medium font-sans md:py-6 py-3"
     >
       Casts
     </p>
   </div>
 
-  <div class="grid grid-cols-3 gap-6">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-7">
     <div
       class="w-fit flex flex-col items-center justify-center gap-6"
       *ngFor="let item of casts"
     >
-      <div class="flex w-[400px] rounded-xl">
+      <div class="flex w-fit rounded-xl">
         <img
           class="object-cover object-center w-16 h-16 rounded-full m-4"
           src="https://image.tmdb.org/t/p/original/{{ item?.profile_path }}"
@@ -165,33 +190,7 @@
     </div>
   </div>
 </div>
-
-<!-- <div  class="flex items-center justify-center flex-col">
-  <div class=" w-full">
-    <p class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6 ">
-    Crew
-    </p>
-  </div>
-
-  <div class="grid grid-cols-3 gap-6">
-    <div
-      class="w-fit flex flex-col items-center justify-center gap-6"
-      *ngFor="let item of casts"
-    >
-    <div class="flex w-[400px]  rounded-xl">
-      <img class="object-cover object-center w-16 h-16 rounded-full m-4 " src="https://image.tmdb.org/t/p/original/{{ item?.profile_path}}" alt="">
-  <div class="h-full flex flex-col items-start justify-center text-gray-200">
-      <p class="text-gray-100 text-base">{{item?.original_name}}</p>
-      <p class="text-gray-400">({{item?.character}})</p>
-    </div>
-    </div>
-    </div>
-  </div>
-</div> -->
-
-
-
-
+<!---------------------------------------------------------------------------/casts----------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------review----------------------------------------------------------------->
 
@@ -199,45 +198,46 @@
   <!-- <p class="text-white">{{review.length}}</p> -->
   <div class="w-full">
     <p
-      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+      class="text-gray-100 text-xl md:text-3xl tracking-widest underline decoration-red-800 underline-offset-4 md:underline-offset-[6px] decoration-4 md:decoration-[6px] px-4 md:px-56 font-medium font-sans md:py-6 py-3"
     >
       Reviews
     </p>
   </div>
 
-  <div class="grid grid-cols-2 gap-6" >
+  <!-- <div class="grid grid-cols-1 xl:grid-cols-2 gap-6" > -->
+    <div class=" flex flex-wrap justify-center items-center gap-8">
     <div
       class="w-fit flex flex-col items-center justify-center gap-6"
       *ngFor="let item of review ; index as i"
     >
     <!-- <div class="text-white">{{item.content}}</div> -->
       <div
-        class="flex bg-[#0f0f0f] w-[640px] rounded-lg text-white outline outline-2 outline-offset-4 outline-[#0f0f0f]"
+        class="flex bg-[#0f0f0f] w-[300px] sm:w-[600px] rounded-lg text-white outline outline-2 outline-offset-4 outline-[#0f0f0f]"
       >
-        <div class="bg-[#0a0a0a] overflow-hidden w-24 flex justify-center py-2">
+        <div class="bg-[#0a0a0a] overflow-hidden w-12 sm:w-24 flex justify-center py-2">
           <img
             *ngIf="checkProfile(item.author_details.avatar_path)"
-            class="rounded-full w-16 h-16"
+            class="rounded-full sm:w-16 sm:h-16 w-8 h-8"
             src="{{ item.author_details.avatar_path.slice(1) }}"
             alt=""
           />
 
           <mat-icon
             *ngIf="!checkProfile(item.author_details.avatar_path)"
-            class="text-[4rem] w-full h-full flex text-gray-300 justify-center"
+            class="texr-[3rem] sm:text-[4rem] w-full h-full flex text-gray-300 justify-center"
           >
             account_circle
           </mat-icon>
         </div>
         <div class="w-full p-3 pb-4">
           <div class="pb-3">
-            <p class="font-medium text-xl  text-white ">A review by {{ item?.author }}</p>
-            <p class="text-sm  text-white ">
+            <p class="font-medium sm:text-xl text-white ">A review by {{ item?.author }}</p>
+            <p class="text-xs  sm:text-sm  text-white ">
               writen by {{ item?.author }} on
               {{ item?.created_at | date : "medium" }}
             </p>
           </div>
-          <div class="h-64 overflow-auto  text-white  ">
+          <div class="h-64 overflow-auto sm:text-base text-sm text-white  ">
             <p>{{ item?.content }}</p>
           </div>
         </div>
@@ -246,9 +246,7 @@
   </div>
 </div>
 
-
 <!---------------------------------------------------------------------------/review----------------------------------------------------------------->
-
 
 <!---------------------------------------------------------------------------similar----------------------------------------------------------------->
 
@@ -257,16 +255,16 @@
   <!-- <p class="text-white">{{sim.length}}</p> -->
   <div class="w-full">
     <p
-      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+      class="text-gray-100 text-xl md:text-3xl tracking-widest underline decoration-red-800 underline-offset-4 md:underline-offset-[6px] decoration-4 md:decoration-[6px] px-4 md:px-56 font-medium font-sans md:py-6 py-3"
     >
       Similar movies
     </p>
   </div>
 
   <div
-    class="overflow-auto flex gap-4 h-full items-center justify-start w-[calc(100%-16rem)] ml-32"
+    class="overflow-auto flex gap-4 h-full items-center justify-start mx-4 md:w-[calc(100%-16rem)] md:ml-32"
   >
-    <div *ngFor="let item of similar"  [routerLink]="['/movieDetials', item.id]" >
+    <div *ngFor="let item of similar"  [routerLink]="['/Detials', 'movie' ,item.id]" >
       <div
         class="w-48 relative overflow-hidden h-full"
         *ngIf="item.poster_path"
@@ -298,20 +296,20 @@
 <!---------------------------------------------------------------------------recommended----------------------------------------------------------------->
 
 
-<div class="" *ngIf="rec" >
+<div  *ngIf="rec" >
   <!-- <p class="text-white">{{sim.length}}</p> -->
   <div class="w-full">
     <p
-      class="text-gray-100 text-3xl tracking-widest underline decoration-red-800 underline-offset-[6px] decoration-[6px] px-56 font-medium font-sans py-6"
+      class="text-gray-100 text-xl md:text-3xl tracking-widest underline decoration-red-800 underline-offset-4 md:underline-offset-[6px] decoration-4 md:decoration-[6px] px-4 md:px-56 font-medium font-sans md:py-6 py-3"
     >
       Recommended movies
     </p>
   </div>
 
   <div
-    class="overflow-auto flex gap-4 h-full items-center justify-start w-[calc(100%-16rem)] ml-32"
+    class="overflow-auto flex gap-4 h-full items-center justify-start mx-4 md:w-[calc(100%-16rem)] md:ml-32"
   >
-    <div *ngFor="let item of recommend"  [routerLink]="['/movieDetials', item.id]" >
+    <div *ngFor="let item of recommend"  [routerLink]="['/Detials', 'movie',item.id ]" >
       <div
         class="w-48 relative overflow-hidden h-full"
         *ngIf="item.poster_path"
@@ -337,3 +335,5 @@
 </div>
 
 <!---------------------------------------------------------------------------/recommended----------------------------------------------------------------->
+
+</div>

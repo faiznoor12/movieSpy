@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-side',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./side.component.scss']
 })
 export class SideComponent {
-
+constructor(public Service: ServiceService){}
 }
